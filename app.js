@@ -47,3 +47,17 @@ var io = socketio.listen(server);
 var rootRouter = require('./routes')(io);
 
 app.use(rootRouter);
+
+
+// var User = require('./models').User;
+// User.find(6).then(function(user){
+//   user.getTweets().then(function(tweets){
+//     console.log(tweets);
+//   });
+// });
+
+var User = require('./models').User;
+var Tweet = require('./models').Tweet;
+Tweet.findAll({ include: [User] }).then(function(tweets){
+	console.log(JSON.stringify(tweets));
+});
