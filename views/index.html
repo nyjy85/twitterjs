@@ -3,8 +3,33 @@
 {% block content %}
   
   <div class="page-header">
-    <h1>{{ title }}</h1>
+    <h1>Welcome to Twitter.js, Nimit!</h1>
   </div>
+
+  <div class="form-submit">
+      {% if showForm %}
+    <form action="/submit" method="POST">
+      <label for="name_field">Name:</label>
+      {% if namePage %}
+        {% for tweet in tweets %}
+          {% if loop.first %}
+            <input name="name" type="tweet" id="name_field" value="{{name}}"/>
+          {% endif %}
+          {% endfor %} 
+      {% else %}
+          <input name="name" type="tweet" id="name_field"/>
+        {% endif %}
+
+
+
+      <label for="tweet_field">tweet:</label>
+      <input name="text" type="text" id="text_field" style="width: 350px;" />
+
+      <input type="submit" value="Submit" />
+    </form>
+  {% endif %}
+  </div>
+
   <div class="row">
     <div class="col-md-3">
       <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg"><br>
@@ -14,28 +39,29 @@
     <div class="col-md-9">
     
       <!-- display tweets here -->
+      {% if tweetLink %}
+
       {% for tweet in tweets %}
-        <div class="tweetbox">
-          <img src="http://lorempixel.com/48/48" />
-          <div class="content">
-            <a class="by" href="/users/{{ tweet.name }}">{{ tweet.name }}</a>
-            <a href="/users/{{ tweet.name }}/tweets/{{ tweet.id }}">{{tweet.text}}</a>
-          </div>
-        </div>
-      {% endfor %}
+        <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg" class='tweeter-photo'>
+        <p class='tweeter-name tweeter-photo'><a href='/users/{{tweet.User.name}}'>{{name}}</a></p>
+        <p class='tweet tweeter-photo'>{{tweet.tweet}}</p>
+        <br>
+        <p class='tweet-link'><a href='/users/{{tweet.User.name}}/tweets/{{tweet.id}}'>Link to this tweet</a></p>
+       
+        <br>
+      {% endfor %} 
 
-      {% if showForm %}
-        <form action="/submit" method="POST">
-          <label for="name_field">Name:</label>
-          <input name="name" type="text" id="name_field" />
+      {% else %}
 
-          <label for="text_field">Text:</label>
-          <input name="text" type="text" id="text_field" style="width: 350px;" />
-
-          <input type="submit" value="Submit" />
-        </form>
+      {% for tweet in tweets %}
+        <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg" class='tweeter-photo'>
+        <p class='tweeter-name tweeter-photo'><a href='/users/{{tweet.User.name}}'>{{tweet.User.name}}</a></p>
+        <p class='tweet tweeter-photo'>{{tweet.tweet}}</p>
+        <p class='tweet-link'><a href='/users/{{tweet.User.name}}/tweets/{{tweet.id}}'>Link to this tweet</a></p>
+       
+        <br>
+      {% endfor %} 
       {% endif %}
-      
     </div>
   </div>
     

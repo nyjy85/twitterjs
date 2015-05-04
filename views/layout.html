@@ -80,17 +80,15 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      // Load the socket.io library above, then connect to the server.
-      // Because the socket.io server is being run on the same server as your 
-      // Express instance, you can connect() without any arguments.
       var socket = io.connect();
 
-      // When 'new_tweet' events are fired, do something with the packaged tweet
-      socket.on('new_tweet', function (tweet) { 
-        console.log(tweet);
-        alert('Refreshing... check the console...');
-        // some logic to add the new tweet to the DOM…
-      }); 
+  socket.on('new_tweet', function (tweet) { 
+    $('.col-md-9').prepend( "\n\n<br>")
+    $('.col-md-9').prepend( "<p class='tweet-link'><a href='/users/"+tweet.name+"/"+tweet.id+"'>Link to this tweet</a></p>")
+    $('.col-md-9').prepend( "<p class='tweet tweeter-photo'>"+tweet.text+"</p>" );
+    $('.col-md-9').prepend( "<p class='tweeter-name tweeter-photo'><a href='/users/"+tweet.name+"'>"+tweet.name+"</a></p>"  );
+    $('.col-md-9').prepend( "<img src='https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg' class='tweeter-photo'>" );
+  }); 
     </script>
   </body>
 </html>

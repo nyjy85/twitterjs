@@ -3,6 +3,42 @@ body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
 }
+
+h1 {
+  color: #5AC6FF;
+  font-family: 'Proxima Nova';
+  font-style: small-caps;
+  font-size: 3em;
+}
+::selection {
+    background-color: none;
+    color: #5AC6FF;
+}
+
+.form-submit {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.tweeter-photo {
+  position: absolute;
+}
+
+
+.tweeter-name {
+  font-size: 1.2em;
+  font-weight: bold; 
+  position: inherit;
+  left: 60px;
+}
+.tweet {
+  left: 60px;
+  position: inherit;
+  bottom: 8px;
+
+}
+
  
 /* Wrapper for page content to push down footer */
 #wrap {
@@ -46,7 +82,7 @@ code {
 }
  
 .tweetbox img {
-  float: left;
+  text-align: left;
   height: 48px;
   width: 48px;
   content:url("http://lorempixel.com/48/48");

@@ -56,8 +56,3 @@ app.use(rootRouter);
 //   });
 // });
 
-var User = require('./models').User;
-var Tweet = require('./models').Tweet;
-Tweet.findAll({ include: [User] }).then(function(tweets){
-	console.log(JSON.stringify(tweets));
-});
