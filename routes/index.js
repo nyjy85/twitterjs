@@ -17,8 +17,9 @@ function routes (io) {
 	router.get('/users/:name', function (req, res) {
 		var userName = req.params.name;
 		userTweets = User.find({where: {name: userName}}).then(function(user){
-			user.getTweets().then(function(list){
-				res.render('index', {title: 'Posts by - ' + userName, tweets: list, showForm: true, name:userName, namePage:true})
+			user.getTweets({include:[User]}).then(function(list){
+				console.log("THe user NAME: ", list);
+				res.render('index', {title: 'Posts by - ' + userName, tweets: list, showForm: true, name:userName, namePage: true})
 			})
 		})
 	});
@@ -27,14 +28,12 @@ function routes (io) {
 		var userName = req.params.name,
 		tweetId = parseInt(req.params.id)
 		var userTweets = User.find({where: {name: userName}}).then(function(user){
-			user.getTweets({where:{id:tweetId}}).then(function(tweet){
+			user.getTweets({where: {id: tweetId}}, {include:[User]}).then(function(tweet){
 				res.render('index', {
 					title: 'Tweet ' + tweetId + ' by ' + userName,
 					tweets: tweet,
 					name: userName,
-					namePage: true,
-					showForm: true,
-					tweetLink: true
+					id: tweetId
 				})
 			});
 		});
@@ -53,5 +52,3 @@ function routes (io) {
 	return router;
 }
 module.exports = routes;
-
-

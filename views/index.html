@@ -13,7 +13,7 @@
       {% if namePage %}
         {% for tweet in tweets %}
           {% if loop.first %}
-            <input name="name" type="tweet" id="name_field" value="{{name}}"/>
+            <input name="name" type="tweet" id="name_field" value="{{tweet.User.name}}"/>
           {% endif %}
           {% endfor %} 
       {% else %}
@@ -39,19 +39,7 @@
     <div class="col-md-9">
     
       <!-- display tweets here -->
-      {% if tweetLink %}
 
-      {% for tweet in tweets %}
-        <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg" class='tweeter-photo'>
-        <p class='tweeter-name tweeter-photo'><a href='/users/{{tweet.User.name}}'>{{name}}</a></p>
-        <p class='tweet tweeter-photo'>{{tweet.tweet}}</p>
-        <br>
-        <p class='tweet-link'><a href='/users/{{tweet.User.name}}/tweets/{{tweet.id}}'>Link to this tweet</a></p>
-       
-        <br>
-      {% endfor %} 
-
-      {% else %}
 
       {% for tweet in tweets %}
         <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg" class='tweeter-photo'>
@@ -61,7 +49,7 @@
        
         <br>
       {% endfor %} 
-      {% endif %}
+
     </div>
   </div>
     
